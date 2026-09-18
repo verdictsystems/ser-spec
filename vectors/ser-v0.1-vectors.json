@@ -1,0 +1,473 @@
+{
+  "schema": "ser.v0.1.legal_ai_output",
+  "domain_separator": "verdict-ser-v0.1",
+  "generated_by": "packages/core (TypeScript reference) — SOURCE OF TRUTH",
+  "note": "Frozen. Regenerate only via WRITE_VECTORS=1 after a reviewed canonical change. crates/verdict-edge/tests/parity_vectors.rs asserts the Rust pipeline reproduces every vector.",
+  "vector_count": 24,
+  "vectors": [
+    {
+      "name": "minimal",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "verdict-test-001",
+        "workflow": "contract_review",
+        "input_summary": "golden vector",
+        "output_summary": "golden vector output",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"golden vector\",\"matter_id\":\"verdict-test-001\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"golden vector output\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"contract_review\"}",
+        "payload_hash": "876089cf9cc1ef9978a89c5244d6aa69d13923dfc1372723d878d4b16abcd54a",
+        "merkle_root": "dcfe572edd5f506cf2ff46bb9473c241a397b4ca42950493cff7b1e2fb27b619",
+        "evidence_record_id": "ser_876089cf9cc1ef9978a89c5244d6aa69"
+      }
+    },
+    {
+      "name": "all_fields_populated",
+      "received_at": "2026-06-01T12:34:56.789Z",
+      "input": {
+        "matter_id": "matter-42",
+        "workflow": "brief_drafting",
+        "input_summary": "Draft a motion to compel discovery.",
+        "output_summary": "Motion drafted with 3 supporting citations.",
+        "human_review_status": "approved",
+        "attorney_reviewer": "A. Reviewer, Esq.",
+        "model_provider": "anthropic",
+        "model": "claude-opus-4-6",
+        "prompt_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "output_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "source_system": "verdict-web",
+        "citations": [
+          "Fed. R. Civ. P. 37",
+          "Doe v. Roe, 123 F.3d 456"
+        ],
+        "risk_flags": [
+          "privilege_review_required"
+        ],
+        "event_time": "2026-06-01T12:30:00.000Z"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":\"A. Reviewer, Esq.\",\"citations\":[\"Fed. R. Civ. P. 37\",\"Doe v. Roe, 123 F.3d 456\"],\"event_time\":\"2026-06-01T12:30:00.000Z\",\"human_review_status\":\"approved\",\"input_summary\":\"Draft a motion to compel discovery.\",\"matter_id\":\"matter-42\",\"metadata\":{},\"model\":\"claude-opus-4-6\",\"model_provider\":\"anthropic\",\"output_hash\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"output_summary\":\"Motion drafted with 3 supporting citations.\",\"prompt_hash\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"received_at\":\"2026-06-01T12:34:56.789Z\",\"risk_flags\":[\"privilege_review_required\"],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"verdict-web\",\"workflow\":\"brief_drafting\"}",
+        "payload_hash": "be9d68a08ec9ef3e775762b652e7010070e9da69316f8bfd8e6720a546a2acb0",
+        "merkle_root": "ce8a83c1132e157e3a5db4fe80158cb54a062103d050751cc178b72d373f1467",
+        "evidence_record_id": "ser_be9d68a08ec9ef3e775762b652e70100"
+      }
+    },
+    {
+      "name": "unicode_summaries",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "café-中文-001",
+        "workflow": "legal_research",
+        "input_summary": "café — naïve coöperation — Ω≈ç√ — 中文字符 — emoji 🔒⚖️",
+        "output_summary": "Ergebnis: Geprüft — résumé — Москва — 日本語",
+        "human_review_status": "revised"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"revised\",\"input_summary\":\"café — naïve coöperation — Ω≈ç√ — 中文字符 — emoji 🔒⚖️\",\"matter_id\":\"café-中文-001\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"Ergebnis: Geprüft — résumé — Москва — 日本語\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"legal_research\"}",
+        "payload_hash": "027e3c9f93fe336148745d4365e9532f0933cd141fce922bbb7c0f88c37009c7",
+        "merkle_root": "e7ef5739ec3c8a1d32931bf798f8a64a5b8a52805a74132d9498635ac243a58f",
+        "evidence_record_id": "ser_027e3c9f93fe336148745d4365e9532f"
+      }
+    },
+    {
+      "name": "json_escape_basic",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "quote\"and\\backslash",
+        "workflow": "nda_triage",
+        "input_summary": "He said \"hello\".\n\tTabbed line.\r\nWindows newline.",
+        "output_summary": "back\\slash and forward/slash and \"double quotes\"",
+        "human_review_status": "pending"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"pending\",\"input_summary\":\"He said \\\"hello\\\".\\n\\tTabbed line.\\r\\nWindows newline.\",\"matter_id\":\"quote\\\"and\\\\backslash\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"back\\\\slash and forward/slash and \\\"double quotes\\\"\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"nda_triage\"}",
+        "payload_hash": "8bfd6172e329081d1992cdf045ead65182ac247ab91f6d5f4bdf108cb5ebbfb3",
+        "merkle_root": "f36d846afec95ae6683de74756dda0f40e730e502170cf395e6fd2e0b3cc8058",
+        "evidence_record_id": "ser_8bfd6172e329081d1992cdf045ead651"
+      }
+    },
+    {
+      "name": "json_escape_control_chars",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "ctrl-001",
+        "workflow": "agentic_action",
+        "input_summary": "bell=\u0007 backspace=\b formfeed=\f vtab=\u000b null=\u0000 unit=\u001f del=",
+        "output_summary": "bom=﻿ nbsp=  lineSep=  paraSep=  tab=\t cr=\r",
+        "human_review_status": "rejected"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"rejected\",\"input_summary\":\"bell=\\u0007 backspace=\\b formfeed=\\f vtab=\\u000b null=\\u0000 unit=\\u001f del=\",\"matter_id\":\"ctrl-001\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"bom=﻿ nbsp=  lineSep=  paraSep=  tab=\\t cr=\\r\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"agentic_action\"}",
+        "payload_hash": "b9d79a91e2d8676970a5946a05d558e75ce7a2a4c82f82a8a1ef989a3bc9d11a",
+        "merkle_root": "dd17d99befefe6d80ac37eeaf331bcdadef844f45f262e489db63e7cfe656184",
+        "evidence_record_id": "ser_b9d79a91e2d8676970a5946a05d558e7"
+      }
+    },
+    {
+      "name": "empty_strings",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "",
+        "workflow": "other",
+        "input_summary": "",
+        "output_summary": "",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"\",\"matter_id\":\"\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"other\"}",
+        "payload_hash": "bbe89251562c1b1772f827ba262b8d4ac3bee8d258ba50026042df2e9257723d",
+        "merkle_root": "d50bbca583f21f4ce22895bedd6a6c55f5c758eee630bd901249cc6586019a5f",
+        "evidence_record_id": "ser_bbe89251562c1b1772f827ba262b8d4a"
+      }
+    },
+    {
+      "name": "long_strings",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "long-001",
+        "workflow": "regulatory_monitoring",
+        "input_summary": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "output_summary": "☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃",
+        "human_review_status": "approved",
+        "citations": [
+          "Citation No. 1",
+          "Citation No. 2",
+          "Citation No. 3",
+          "Citation No. 4",
+          "Citation No. 5",
+          "Citation No. 6",
+          "Citation No. 7",
+          "Citation No. 8",
+          "Citation No. 9",
+          "Citation No. 10",
+          "Citation No. 11",
+          "Citation No. 12",
+          "Citation No. 13",
+          "Citation No. 14",
+          "Citation No. 15",
+          "Citation No. 16",
+          "Citation No. 17",
+          "Citation No. 18",
+          "Citation No. 19",
+          "Citation No. 20",
+          "Citation No. 21",
+          "Citation No. 22",
+          "Citation No. 23",
+          "Citation No. 24",
+          "Citation No. 25"
+        ]
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[\"Citation No. 1\",\"Citation No. 2\",\"Citation No. 3\",\"Citation No. 4\",\"Citation No. 5\",\"Citation No. 6\",\"Citation No. 7\",\"Citation No. 8\",\"Citation No. 9\",\"Citation No. 10\",\"Citation No. 11\",\"Citation No. 12\",\"Citation No. 13\",\"Citation No. 14\",\"Citation No. 15\",\"Citation No. 16\",\"Citation No. 17\",\"Citation No. 18\",\"Citation No. 19\",\"Citation No. 20\",\"Citation No. 21\",\"Citation No. 22\",\"Citation No. 23\",\"Citation No. 24\",\"Citation No. 25\"],\"event_time\":null,\"human_review_status\":\"approved\",\"input_summary\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\"matter_id\":\"long-001\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"regulatory_monitoring\"}",
+        "payload_hash": "581f9597a9d8ec43801edda62a903f6f3433b673ee0c86328449f0e99be64467",
+        "merkle_root": "1ba1657abee80158e4df6b3f3ef1c4ca4e34f3c19be58c0d5866340128775639",
+        "evidence_record_id": "ser_581f9597a9d8ec43801edda62a903f6f"
+      }
+    },
+    {
+      "name": "null_vs_present_optionals",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "nulls-001",
+        "workflow": "docket_watch",
+        "input_summary": "explicit nulls",
+        "output_summary": "explicit nulls",
+        "human_review_status": "pending",
+        "attorney_reviewer": null,
+        "model": null,
+        "prompt_hash": null,
+        "output_hash": null,
+        "event_time": null
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"pending\",\"input_summary\":\"explicit nulls\",\"matter_id\":\"nulls-001\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"explicit nulls\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"docket_watch\"}",
+        "payload_hash": "6a73af0616320627fe898fb2b95c5bd73c2c16f11fff107b25901d6cf16e7bbf",
+        "merkle_root": "d67b49d0aa5561f2289b0b376ac3361441e8858fbd9101423f86c13fe3c6f117",
+        "evidence_record_id": "ser_6a73af0616320627fe898fb2b95c5bd7"
+      }
+    },
+    {
+      "name": "special_chars_in_arrays",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "arrays-001",
+        "workflow": "live_demo",
+        "input_summary": "array escaping",
+        "output_summary": "array escaping",
+        "human_review_status": "demo_no_review",
+        "citations": [
+          "\"quoted\"",
+          "tab\there",
+          "newline\nhere",
+          "unicode ⚖️"
+        ],
+        "risk_flags": [
+          "flag\\one",
+          "flag/two"
+        ]
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[\"\\\"quoted\\\"\",\"tab\\there\",\"newline\\nhere\",\"unicode ⚖️\"],\"event_time\":null,\"human_review_status\":\"demo_no_review\",\"input_summary\":\"array escaping\",\"matter_id\":\"arrays-001\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"array escaping\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[\"flag\\\\one\",\"flag/two\"],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"live_demo\"}",
+        "payload_hash": "7f169bb66ff3efce2e463da812af588a1a839777176143bd3e09cf635867636b",
+        "merkle_root": "d1a94cf5ba527bb8ab40221b91e968a9a881889362346750a0d376323519e926",
+        "evidence_record_id": "ser_7f169bb66ff3efce2e463da812af588a"
+      }
+    },
+    {
+      "name": "workflow_contract_review",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "wf-contract_review",
+        "workflow": "contract_review",
+        "input_summary": "workflow=contract_review",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"workflow=contract_review\",\"matter_id\":\"wf-contract_review\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"contract_review\"}",
+        "payload_hash": "4daded095faaf8b98a93b3dc1191c74ecdc51a7296a38aea8c083558a00d4eae",
+        "merkle_root": "0dfe8a221b5c70454d28449d4e278da6a8ecfc8883cc214240391716dea8d93d",
+        "evidence_record_id": "ser_4daded095faaf8b98a93b3dc1191c74e"
+      }
+    },
+    {
+      "name": "workflow_brief_drafting",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "wf-brief_drafting",
+        "workflow": "brief_drafting",
+        "input_summary": "workflow=brief_drafting",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"workflow=brief_drafting\",\"matter_id\":\"wf-brief_drafting\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"brief_drafting\"}",
+        "payload_hash": "3c4ea41f5304a9f40ea94024a0671e9e66c6c9d88e364fb3997d6bb0ba21c1a6",
+        "merkle_root": "65c83646d294e8865a5a0514d834c9d4834058813140f9942addc8719c9651cd",
+        "evidence_record_id": "ser_3c4ea41f5304a9f40ea94024a0671e9e"
+      }
+    },
+    {
+      "name": "workflow_nda_triage",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "wf-nda_triage",
+        "workflow": "nda_triage",
+        "input_summary": "workflow=nda_triage",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"workflow=nda_triage\",\"matter_id\":\"wf-nda_triage\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"nda_triage\"}",
+        "payload_hash": "9a9c0db26127a07f47786dec13295ce45d6d14a48f4c145aa903bf98ae2326c5",
+        "merkle_root": "da1370a7e4dbcdace93c1ef1b2e2214b7c4e4cda2d0c11d36af324cf7821eb65",
+        "evidence_record_id": "ser_9a9c0db26127a07f47786dec13295ce4"
+      }
+    },
+    {
+      "name": "workflow_legal_research",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "wf-legal_research",
+        "workflow": "legal_research",
+        "input_summary": "workflow=legal_research",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"workflow=legal_research\",\"matter_id\":\"wf-legal_research\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"legal_research\"}",
+        "payload_hash": "084e8745e703dd110e06188e2695232bf3039085ac7e9335e3ee829b26c88a3a",
+        "merkle_root": "371ce65382c7a4e5e6394e16216e4a0579cb3f00484608526c55af9c66602e11",
+        "evidence_record_id": "ser_084e8745e703dd110e06188e2695232b"
+      }
+    },
+    {
+      "name": "workflow_regulatory_monitoring",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "wf-regulatory_monitoring",
+        "workflow": "regulatory_monitoring",
+        "input_summary": "workflow=regulatory_monitoring",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"workflow=regulatory_monitoring\",\"matter_id\":\"wf-regulatory_monitoring\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"regulatory_monitoring\"}",
+        "payload_hash": "10688013d3ecc8aa903ac876e86d5813442b75a59ebbb1d5c56675831e2d221c",
+        "merkle_root": "b434c6e9d66bcde1ab8ed272529f48041b02d36a0163dc57f0b9a9738f21ac47",
+        "evidence_record_id": "ser_10688013d3ecc8aa903ac876e86d5813"
+      }
+    },
+    {
+      "name": "workflow_docket_watch",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "wf-docket_watch",
+        "workflow": "docket_watch",
+        "input_summary": "workflow=docket_watch",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"workflow=docket_watch\",\"matter_id\":\"wf-docket_watch\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"docket_watch\"}",
+        "payload_hash": "c705af6b21882220e080231ce4600f257459d3bebf89f21b8f962fd455c0473d",
+        "merkle_root": "035a9ceebecb1e7fd580b6dffe1d321a69e627d10ef6de5c6ee895a534cbb7eb",
+        "evidence_record_id": "ser_c705af6b21882220e080231ce4600f25"
+      }
+    },
+    {
+      "name": "workflow_agentic_action",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "wf-agentic_action",
+        "workflow": "agentic_action",
+        "input_summary": "workflow=agentic_action",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"workflow=agentic_action\",\"matter_id\":\"wf-agentic_action\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"agentic_action\"}",
+        "payload_hash": "1ba786a57f6120341f441b117dd71f8a24807217cdf9747e9da87e7c1e838e7c",
+        "merkle_root": "276e84e98d850d182aa252c9ad479c39230e2bded3007c5442fab3088cfd76f5",
+        "evidence_record_id": "ser_1ba786a57f6120341f441b117dd71f8a"
+      }
+    },
+    {
+      "name": "workflow_live_demo",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "wf-live_demo",
+        "workflow": "live_demo",
+        "input_summary": "workflow=live_demo",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"workflow=live_demo\",\"matter_id\":\"wf-live_demo\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"live_demo\"}",
+        "payload_hash": "38e6a83f24a338616a7a64ec168a5f2bff6ea5849951e5ee7bf5eb93ee7309af",
+        "merkle_root": "ec08bb9c292583901480a8721ef3074aefd096f88a432c634aca7b2f02131293",
+        "evidence_record_id": "ser_38e6a83f24a338616a7a64ec168a5f2b"
+      }
+    },
+    {
+      "name": "workflow_other",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "wf-other",
+        "workflow": "other",
+        "input_summary": "workflow=other",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"workflow=other\",\"matter_id\":\"wf-other\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"other\"}",
+        "payload_hash": "f2fb6619c3d4e96fe54fdad9d15f95a3d66e8cf8c4da1184ea7e378b87a13314",
+        "merkle_root": "b94312e6c13de932e0d53c77c74cc80a3d7d964c9a9d147881d26fdbc0294081",
+        "evidence_record_id": "ser_f2fb6619c3d4e96fe54fdad9d15f95a3"
+      }
+    },
+    {
+      "name": "review_state_pending",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "st-pending",
+        "workflow": "other",
+        "input_summary": "state=pending",
+        "output_summary": "ok",
+        "human_review_status": "pending"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"pending\",\"input_summary\":\"state=pending\",\"matter_id\":\"st-pending\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"other\"}",
+        "payload_hash": "949355d895cfde0a79b5eda73e5f55da11f2ca23ff92644dcf5e525588e22644",
+        "merkle_root": "32a1d2df1615cffed8582c72ef77b8e850af6e837d14c2db8bd8c8fc4e085e2b",
+        "evidence_record_id": "ser_949355d895cfde0a79b5eda73e5f55da"
+      }
+    },
+    {
+      "name": "review_state_approved",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "st-approved",
+        "workflow": "other",
+        "input_summary": "state=approved",
+        "output_summary": "ok",
+        "human_review_status": "approved"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"approved\",\"input_summary\":\"state=approved\",\"matter_id\":\"st-approved\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"other\"}",
+        "payload_hash": "1fea3d4011843b7e95e4f5332b7ba0c8612222943e5ebbeca3527f0e494be4ab",
+        "merkle_root": "60cd8ba14121659366f14454cb068d6829c907ef7e6aa85f7e45715910030efb",
+        "evidence_record_id": "ser_1fea3d4011843b7e95e4f5332b7ba0c8"
+      }
+    },
+    {
+      "name": "review_state_revised",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "st-revised",
+        "workflow": "other",
+        "input_summary": "state=revised",
+        "output_summary": "ok",
+        "human_review_status": "revised"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"revised\",\"input_summary\":\"state=revised\",\"matter_id\":\"st-revised\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"other\"}",
+        "payload_hash": "4a2bea75afd1c50a4cb3e00d97307c440de516087ad291e7108da5a3ca6b4994",
+        "merkle_root": "727856bcdd0b5aff52989434d05bbe9f877a49f228afb9c9fff81d267911c717",
+        "evidence_record_id": "ser_4a2bea75afd1c50a4cb3e00d97307c44"
+      }
+    },
+    {
+      "name": "review_state_rejected",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "st-rejected",
+        "workflow": "other",
+        "input_summary": "state=rejected",
+        "output_summary": "ok",
+        "human_review_status": "rejected"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"rejected\",\"input_summary\":\"state=rejected\",\"matter_id\":\"st-rejected\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"other\"}",
+        "payload_hash": "e159d9c6c825c91e1702586e639b93b0a0b988fdf0f89be6ba219b541a5e75c3",
+        "merkle_root": "221c7ee31cae9ef3db55430764ab260cf48c9f605fae66f077281dab7bb7f397",
+        "evidence_record_id": "ser_e159d9c6c825c91e1702586e639b93b0"
+      }
+    },
+    {
+      "name": "review_state_not_required",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "st-not_required",
+        "workflow": "other",
+        "input_summary": "state=not_required",
+        "output_summary": "ok",
+        "human_review_status": "not_required"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"not_required\",\"input_summary\":\"state=not_required\",\"matter_id\":\"st-not_required\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"other\"}",
+        "payload_hash": "636a229dfebdd416cfa15ad69cf32f07879b18b563304d951c1cd65f19b207fb",
+        "merkle_root": "ea080410c571cdd6cd1d7294562d9b16c239e4f267d8d9d01fd3ed48efb73888",
+        "evidence_record_id": "ser_636a229dfebdd416cfa15ad69cf32f07"
+      }
+    },
+    {
+      "name": "review_state_demo_no_review",
+      "received_at": "2026-05-28T00:00:00.000Z",
+      "input": {
+        "matter_id": "st-demo_no_review",
+        "workflow": "other",
+        "input_summary": "state=demo_no_review",
+        "output_summary": "ok",
+        "human_review_status": "demo_no_review"
+      },
+      "expected": {
+        "canonical": "{\"attorney_reviewer\":null,\"citations\":[],\"event_time\":null,\"human_review_status\":\"demo_no_review\",\"input_summary\":\"state=demo_no_review\",\"matter_id\":\"st-demo_no_review\",\"metadata\":{},\"model\":null,\"model_provider\":\"unknown\",\"output_hash\":null,\"output_summary\":\"ok\",\"prompt_hash\":null,\"received_at\":\"2026-05-28T00:00:00.000Z\",\"risk_flags\":[],\"schema\":\"ser.v0.1.legal_ai_output\",\"source_system\":\"unknown\",\"workflow\":\"other\"}",
+        "payload_hash": "e45d78f265fcc7c87e156e28f0835c6592c9f1e1b2cfccf72072b26bc8061977",
+        "merkle_root": "47127eec1f5c0b0931cf191f22a99787dd0c99aaae57af5c7bf5eb8ee39b9498",
+        "evidence_record_id": "ser_e45d78f265fcc7c87e156e28f0835c65"
+      }
+    }
+  ]
+}
