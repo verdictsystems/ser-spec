@@ -8,15 +8,72 @@ Usage:
 
 Exit code 0 = every check passed, 1 = a check failed, 2 = usage.
 """
-import base64, hashlib, json, subprocess, sys, tempfile, urllib.request
+import base64, hashlib, json, math, re, subprocess, sys, tempfile, urllib.request
 
 SCHEMA = "ser.v0.1.legal_ai_output"
 DOMAIN = "verdict-ser-v0.1"
+MAX_DEPTH = 50
+
+class CanonicalError(ValueError):
+    """The value has no SER v0.1 canonical form (SPEC.md §4.5)."""
 
 def canonical(obj) -> str:
-    """SER v0.1 canonical form: keys sorted by code unit, no whitespace,
-    JSON string escaping per ECMAScript JSON.stringify, non-ASCII kept raw."""
-    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    """SER v0.1 canonical form (SPEC.md §4), byte-identical to the frozen TypeScript
+    stableStringify. json.dumps is not a substitute: it sorts keys by code point,
+    formats floats differently and has no depth limit (see the §4 erratum)."""
+    return _canon(obj, 0)
+
+def _canon(v, depth: int) -> str:
+    if depth > MAX_DEPTH:                   # §4.5, checked for every value as stableStringify does
+        raise CanonicalError(f"depth {depth}")
+    if v is None: return "null"
+    if v is True: return "true"
+    if v is False: return "false"
+    if isinstance(v, (int, float)): return _number(v)
+    if isinstance(v, str): return _string(v)
+    if isinstance(v, list):
+        return "[" + ",".join(_canon(x, depth + 1) for x in v) + "]"
+    if isinstance(v, dict):                 # §4.1: UTF-16 code-unit order, what JavaScript's < compares
+        keys = sorted(v, key=lambda k: k.encode("utf-16-be", "surrogatepass"))
+        return "{" + ",".join(_string(k) + ":" + _canon(v[k], depth + 1) for k in keys) + "}"
+    raise TypeError(f"not a JSON value: {v!r}")
+
+def _number(x) -> str:
+    """ECMAScript Number::toString (§4.4). JSON numbers are IEEE-754 doubles, as JSON.parse reads them."""
+    try:
+        x = float(x)
+    except OverflowError:                   # integer literal beyond double range: JSON.parse gives ±Infinity
+        x = math.inf if x > 0 else -math.inf
+    if not math.isfinite(x): return "null"  # JSON.stringify(NaN), JSON.stringify(±Infinity)
+    if x == 0: return "0"                   # includes -0
+    if x < 0: return "-" + _number(-x)
+    # repr gives the shortest round-trip digits; recover s (k digits) and n with x = 0.s × 10^n
+    mant, _, exp = repr(x).partition("e")
+    whole, _, frac = mant.partition(".")
+    digits = (whole + frac).lstrip("0")
+    n = len(digits) - len(frac) + int(exp or 0)
+    s = digits.rstrip("0"); k = len(s)
+    if k <= n <= 21: return s + "0" * (n - k)
+    if 0 < n <= 21: return s[:n] + "." + s[n:]
+    if -6 < n <= 0: return "0." + "0" * -n + s
+    e = n - 1
+    return (s if k == 1 else s[0] + "." + s[1:]) + ("e+" if e >= 0 else "e-") + str(abs(e))
+
+_ESCAPE = re.compile(r'["\\\x00-\x1f\ud800-\udfff]')
+_SHORT = {'"': '\\"', "\\": "\\\\", "\b": "\\b", "\t": "\\t", "\n": "\\n", "\f": "\\f", "\r": "\\r"}
+
+def _string(s: str) -> str:
+    """ECMAScript JSON.stringify of a string (§4.3): short escapes, other C0 controls and lone
+    surrogates as lowercase \\uXXXX, every other code point raw (including U+007F, U+2028, U+2029)."""
+    return '"' + _ESCAPE.sub(lambda m: _SHORT.get(m[0]) or f"\\u{ord(m[0]):04x}", s) + '"'
+
+def _reject_constant(name):
+    raise ValueError(f"{name} is not JSON (RFC 8259)")
+
+def load_json(path: str):
+    """Read a file the way JSON.parse would: UTF-8, and NaN / Infinity rejected."""
+    with open(path, encoding="utf-8") as f:
+        return json.load(f, parse_constant=_reject_constant)
 
 def sha256_hex(s: str) -> str:
     return hashlib.sha256(s.encode("utf-8")).hexdigest()
@@ -33,7 +90,10 @@ def derive(record: dict) -> dict:
     }
 
 def check_offline(ser: dict) -> list:
-    d = derive(ser["record"])
+    try:
+        d = derive(ser["record"])
+    except CanonicalError as e:
+        return [("canonical_form", f"depth <= {MAX_DEPTH} (SPEC.md §4.5)", e, False)]
     checks = [
         ("schema_version", SCHEMA, ser.get("schema"), ser.get("schema") == SCHEMA and ser["record"].get("schema") == SCHEMA),
         ("payload_hash", d["payload_hash"], ser.get("payload_hash"), d["payload_hash"] == ser.get("payload_hash")),
@@ -76,7 +136,7 @@ def report(checks) -> bool:
     return ok
 
 def run_vectors(path: str) -> bool:
-    v = json.load(open(path))
+    v = load_json(path)
     ok = True
     for vec in v["vectors"]:
         rec = build_record(vec["input"], vec["received_at"])
@@ -117,7 +177,7 @@ if __name__ == "__main__":
         print(__doc__); sys.exit(2)
     if args[0] == "--vectors":
         sys.exit(0 if run_vectors(args[1]) else 1)
-    ser = json.load(open(args[0]))
+    ser = load_json(args[0])
     checks = check_offline(ser)
     if "--anchor" in args:
         checks += check_anchor(ser)
